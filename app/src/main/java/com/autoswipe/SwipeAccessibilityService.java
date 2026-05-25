@@ -114,15 +114,19 @@ public class SwipeAccessibilityService extends AccessibilityService {
         swipePath.lineTo(endX, endY);
         GestureDescription.Builder gestureBuilder = new GestureDescription.Builder();
         gestureBuilder.addStroke(new GestureDescription.StrokeDescription(swipePath, 0, swipeDuration));
-        dispatchGesture(gestureBuilder.build(), new GestureDescription.GestureResultCallback() {
-            @Override
-            public void onCompleted(GestureDescription gestureDescription) {
-                Log.d(TAG, "第 " + currentCount.get() + " 次滑动完成");
-            }
-            @Override
-            public void onCancelled(GestureDescription gestureDescription) {
-                Log.w(TAG, "第 " + currentCount.get() + " 次滑动被取消");
-            }
-        }, null);
+        GestureResultCallbackImpl callbackImpl = new GestureResultCallbackImpl();
+        dispatchGesture(gestureBuilder.build(), callbackImpl, null);
+    }
+
+    private class GestureResultCallbackImpl extends GestureDescription.GestureResultCallback {
+        @Override
+        public void onCompleted(GestureDescription gestureDescription) {
+            Log.d(TAG, "滑动完成");
+        }
+
+        @Override
+        public void onCancelled(GestureDescription gestureDescription) {
+            Log.w(TAG, "滑动被取消");
+        }
     }
 }
