@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">自动滑动</string>
+    <string name="accessibility_description">自动滑动服务：用于模拟向上滑动手势，实现短视频自动翻页功能。</string>
+</resources>
